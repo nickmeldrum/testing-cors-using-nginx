@@ -11,20 +11,24 @@ const logger = (() => {
 })()
 
 const xhr = (() => {
-  const request = url => {
+  const request = (method, url, body) => {
     const xhr = new XMLHttpRequest()
     xhr.addEventListener('load', () => logger.log(`success response ${xhr.response} from request ${url}`))
     xhr.addEventListener('error', err => logger.log(`err ${err} from request ${url}`))
     xhr.addEventListener('abort', () => logger.log(`request ${url} aborted`))
-    xhr.open('GET', url, true)
+    xhr.open(method, url, true)
+    if (method === 'POST') {
+      xhr.setRequestHeader('Accept', 'application/json');
+      xhr.setRequestHeader('Content-Type', 'application/json');
+    }
     xhr.withCredentials = 'true'
-    xhr.send()
+    xhr.send(body)
     logger.log(`request to ${url} initiated...`)
   }
 
   return { request }
 })()
 
-xhr.request('http://api.website.com:3080/api/products/')
+xhr.request('GET', 'http://api.website.com:3080/api/products/')
+xhr.request('POST', 'http://api.website.com:3080/api/products/', '{"name": "avocado"}')
 
-xhr.request('http://www.website.com:3080/api/products/')
