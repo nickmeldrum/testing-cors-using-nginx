@@ -13,9 +13,9 @@ const logger = (() => {
 const xhr = (() => {
   const request = url => {
     const xhr = new XMLHttpRequest()
-    xhr.addEventListener('load', () => logger.log(xhr.response))
-    xhr.addEventListener('error', err => logger.log(err))
-    xhr.addEventListener('abort', () => logger.log('aborted'))
+    xhr.addEventListener('load', () => logger.log(`success response ${xhr.response} from request ${url}`))
+    xhr.addEventListener('error', err => logger.log(`err ${err} from request ${url}`))
+    xhr.addEventListener('abort', () => logger.log(`request ${url} aborted`))
     xhr.open('GET', url, true)
     xhr.withCredentials = 'true'
     xhr.send()
