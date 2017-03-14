@@ -6,6 +6,8 @@
  * run nginx with command: `nginx`
  * stop nginx with command: `nginx -s stop`
  * test if a port is bound to nginx with command: `lsof -i:8080`
+ * run both the www webserver on `www.website.com:3080` and
+   the api server on `api.website.com:3080` by running the command: `node index.js`
  * write the following contents to file: `/usr/local/etc/nginx/nginx.conf`
 
 ```
@@ -19,7 +21,7 @@ http {
   keepalive_timeout 65;
   server {
     listen 3080;
-    server_name host1.com;
+    server_name www.website.com;
     location / {
       proxy_pass http://localhost:3081;
       proxy_http_version 1.1;
@@ -31,7 +33,7 @@ http {
   }
   server {
     listen 3080;
-    server_name host2.com;
+    server_name api.website.com;
     location / {
       proxy_pass http://localhost:3082;
       proxy_http_version 1.1;
@@ -46,6 +48,6 @@ http {
 
  * add the following contents to file `/etc/hosts`
 ```
-127.0.0.1   host1.com
-127.0.0.1   host2.com
+127.0.0.1   www.website.com
+127.0.0.1   api.website.com
 ```

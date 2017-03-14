@@ -2,6 +2,9 @@ const express = require('express')
 const www = express()
 const api = express()
 
-www.use(express.static('client')).listen(3081)
+www.use(express.static('client'))
+www.get('/api/products/', (req, res) => { res.json('{"data": "returned from www"}') })
+www.listen(3081)
 
-api.get('/api/products/', (req, res) => { res.json('{"data": "oh hai there"}') }).listen(3082)
+api.get('/api/products/', (req, res) => { res.json('{"data": "returned from api"}') })
+api.listen(3082)
