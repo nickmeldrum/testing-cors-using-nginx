@@ -1,0 +1,11 @@
+{
+  "name": "nginx-reverse-proxy",
+  "version": "1.0.0",
+  "description": "Testing cors using 2 node servers and nginx as a reverse proxy",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nick Meldrum",
+  "license": "MIT"
+}
